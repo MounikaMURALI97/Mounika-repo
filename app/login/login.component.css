@@ -1,0 +1,42 @@
+
+.title
+{
+	background-color:#37475a;	
+    height:100px;
+    color:white;
+    text-align:center;
+    
+}
+
+.heading
+{
+    color:#37475a;
+    font-weight:bold;	
+    height:50px;
+    width:100%;
+	text-align:center;
+}
+.button
+{
+    border-radius:2px;
+    background: #96ccf8;
+    border:1px solid #96ccf8;
+    font-size:15px;
+}
+
+table {
+    font-family: Palatino, serif;
+    margin-left:auto; 
+    margin-right:auto; 
+}
+
+td,th{
+    padding: 5px 10px;     
+    text-align: center; 
+}
+ 
+
+
+
+
+

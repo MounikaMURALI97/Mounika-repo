@@ -1,0 +1,36 @@
+td
+{
+    width:200px;
+    height:150px;
+    text-align:center;
+}
+.header
+{
+	background-color:#37475a;	
+    height:100px;
+    width:100%;
+    color:white;
+    text-align:center;
+    
+}
+#cartProd
+{
+    margin:100px;
+}
+.navigationLinks
+{
+  float: right;
+}
+
+.mainLink
+{
+    
+    color:white;  
+      
+    padding: 15px;
+   
+}
+.mainLink:hover
+{
+    color:#d7ec73;
+}

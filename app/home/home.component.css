@@ -1,0 +1,45 @@
+.header
+{
+	background-color:#37475a;	
+    height:100px;
+    width:100%;
+    color:white;
+    text-align:center;
+    
+}
+.navigationLinks
+{
+  float: right;
+}
+
+.mainLink
+{
+    
+    color:white;  
+      
+    padding: 15px;
+   
+}
+.mainLink:hover
+{
+    color:#d7ec73;
+}
+
+  .searchAndCategory
+  {
+    margin-top: 15px;
+    
+    height:100px;    
+  }
+  .searchTable
+  {
+    margin-left:auto; 
+    margin-right:auto; 
+  }
+  .button
+{
+    border-radius:2px;
+    background: #96ccf8;
+    border:1px solid #96ccf8;
+    font-size:15px;
+}

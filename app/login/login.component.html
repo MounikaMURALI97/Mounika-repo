@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <h1>Login</h1>
+  </head>
+  <body>
+
+      <h1 class="title"  >Vyntra Mart</h1>
+      <div class="container text-center">      
+        <h4 class="heading">Login</h4>     
+      <small class="text-danger">{{errorMessage}}</small>
+      <div class="login-form">
+      <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm">        
+          <table>      
+            <tr>
+              <td>
+              <label for="gmailId">UserName</label>
+            </td>
+            <td>
+             <input type="text" name="gmailId" class="form-control" placeholder="Enter gmailId" [(ngModel)]="user.gmailId" #gmailId="ngModel" 
+             [class.is-invalid]="(f.submitted && gmailId.invalid )" required/>
+            </td>
+            <small class="text-danger" *ngIf="f.submitted && gmailId.invalid ">
+              <div *ngIf="gmailId.errors.required">*Gmail Id is required</div>
+            </small>
+            
+          </tr>
+          <tr>
+            <td>
+              <label for="password">Password</label>
+            </td>
+            <td>
+              <input type="password"class="form-control"  name="password" placeholder="Enter password" required [(ngModel)]="user.password" #password="ngModel"
+              [class.is-invalid]="(f.submitted && gmailId.invalid )" required/>
+            </td>
+            <small class="text-danger" *ngIf="(f.submitted && password.invalid) ">
+              <div *ngIf="password.errors.required">*Password is required</div>
+            </small>
+          </tr>
+          <tr>
+            <td></td>
+             <td colspan=2 style="text-align:center">
+                <button type="submit" class="button">Login</button>
+                &nbsp;or&nbsp;<a class="inline_block" [routerLink]="['/adminlogin']">Login as Admin</a>
+              </td>
+          </tr>
+        </table>              
+    </form> 
+  </div>   
+    <div class="signup">
+      <p>------or-------</p>
+      new User?&nbsp;<a class="inline_block" [routerLink]="['/signUp']">Sign Up</a>  
+    </div>   
+
+  </div>
+ 
+  </body>
+</html>

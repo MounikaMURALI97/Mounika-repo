@@ -1,0 +1,53 @@
+<html>
+  <head>
+    Order Management Page
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title"  >Vyntra Mart</h1>
+      <div class="navigationLinks">
+                        
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="mainLink" routerLink="/adminhome">home</a>                         
+          </li> 
+          <li class="nav-item">
+              <a class="mainLink" routerLink="/adminlogin" (click)="logout()">logout</a>                         
+          </li>
+       </ul>                        
+      </div>
+   </header>
+  
+   <div class="container text-center">
+    <h4 class="heading"> Order Details List</h4>
+<table>
+  <tr *ngFor="let p of prod;let i=index">
+    <td *ngIf="i<1">
+      <table border="1">
+        <tr>
+          <th>Product Image</th>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Quantity</th>
+          <th>Conform Order</th>
+          <th>Cancel Order</th>
+        </tr>
+          <tr *ngFor="let o of OrderedItems;let j=index">
+            
+            
+            <td><img class="custom-image-style" img src="{{prod[j].image}}" height="100px" width="100px"></td>
+            <td>{{prod[j].pname}}</td>
+            <td>{{o.subTotal}}</td>
+            <td>{{o.orderedQuantity}}</td>
+            <td><button class="btn btn-success" (click)="updateOrderStatus(o)">Confirm</button></td>
+            <td><button class="btn btn-success" (click)=" updateProduct(o,prod[j].pid)">cancel</button></td>
+            </tr>
+</table>
+  </td>
+  </tr>
+  
+  
+</table>
+   </div>
+</body>
+</html>

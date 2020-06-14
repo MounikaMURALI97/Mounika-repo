@@ -1,0 +1,205 @@
+<html>
+  <head>
+    <title>Delivery Location</title>
+  </head>
+  <body>
+    <div class="container-fluid header">
+      <h1 class="title"  >Vyntra Mart</h1>
+
+        <div class="navigationLinks">
+               
+          <ul class="nav ">  
+            <li class="nav-item">
+                 <a class="mainLink" routerLink="/home">Home</a>                                                  
+            </li>                           
+            <li class="nav-item">
+                 <a class="mainLink" routerLink="/profilepage">{{parsedjsonUser.firstName}}</a>                                                  
+            </li>
+            <li class="nav-item">
+                 <a class="mainLink"  routerLink="/deliverylocation">Delivery Location</a>                                                  
+            </li>
+            <li class="nav-item">
+                 <a class="mainLink"  routerLink="/orders">Order Details</a>                                                  
+            </li> 
+            <li class="nav-item">
+                 <a class="mainLink"  routerLink="/cart">Cart</a>                                                  
+            </li> 
+           <li class="nav-item">
+                 <a class="mainLink" routerLink="['']" (click)="logout()">logout</a>                         
+           </li>
+      </ul>          
+                           
+        </div>
+
+  </div>
+    <div class="container text-center">      
+      <small class="text-danger">{{errorMessage}}</small>  
+      <div class="new-address-group" *ngIf="!address"> 
+        <form name="form" (ngSubmit)="f.form.valid && saveUserAddress()" #f="ngForm">
+         
+            <table>             
+              <tr>
+                <td class="table-heading">
+                    <label for="street">Street</label>
+                  </td>
+                  <td>                    
+                      <input type="text"  class="form-control" name="street" autocomplete="name"   [(ngModel)]="newAddress.street" #street="ngModel" 
+                      [class.is-invalid]="(f.submitted && street.invalid)" required>
+                      <small class="text-danger" *ngIf="(f.submitted && street.invalid) ">
+                        <div *ngIf="street.errors.required">*Street is required</div>
+                      </small>
+                  </td>     
+                      
+              </tr> 
+              <tr>
+                <td class="table-heading">
+                    <label for="district">District</label>
+                  </td>
+                  <td>                   
+                      <input type="text" class="form-control" name="district" [(ngModel)]="newAddress.district" #district="ngModel" 
+                      [class.is-invalid]="(f.submitted && district.invalid )" required>
+                      <small class="text-danger" *ngIf="(f.submitted && district.invalid) ">
+                        <div *ngIf="district.errors.required">*District is required</div>
+                      </small>                    
+                  </td>             
+                           
+              </tr> 
+              <tr>
+                <td class="table-heading">
+                    <label for="state">State</label>
+                  </td>
+                  <td>
+                      
+                      <input type="text" class="form-control" name="state" [(ngModel)]="newAddress.state" #state="ngModel" 
+                      [class.is-invalid]="(f.submitted && state.invalid )" required>
+                      <small class="text-danger" *ngIf="(f.submitted && state.invalid) ">
+                        <div *ngIf="state.errors.required">*State is required</div>
+                      </small>
+                      
+                  </td>              
+              </tr>
+              <tr>
+                <td class="table-heading">
+                    <label for="country">Country</label>
+                  </td>
+                  <td>
+                        <input type="text" class="form-control" name="country" [(ngModel)]="newAddress.country" #country="ngModel"
+                        [class.is-invalid]="(f.submitted && country.invalid )" required>
+                        <small class="text-danger" *ngIf="(f.submitted && country.invalid) ">
+                          <div *ngIf="country.errors.required">*Country is required</div>
+                        </small>
+                      
+                  </td>              
+              </tr> 
+              
+              <tr>
+                <td class="table-heading">
+                    <label for="pinCode">Pincode</label>
+                  </td>
+                  <td>                   
+                      <input type="text" class="form-control" name="pinCode"  [(ngModel)]="newAddress.pinCode" #pinCode="ngModel"
+                      [class.is-invalid]="(f.submitted && pinCode.invalid )" required minlength="6" maxlength="6">   
+                      <small class="text-danger" *ngIf="(f.submitted && pinCode.invalid) ">
+                        <div *ngIf="pinCode.errors.required">*Pincode is required</div>
+                        <div *ngIf="pinCode.errors.minlength">Pincode must be at least 6 characters</div>
+                        
+                      </small>                
+                  </td>              
+              </tr>
+              
+            <tr>            
+                  <td colspan=2 class="table-heading">
+                    <button class="button"  type="submit">Save Address</button> 
+                 
+                </td>
+            </tr>
+          </table>        
+        </form> 
+      </div>
+      <div class="address-group" *ngIf="address">
+        <form name="form" (ngSubmit)="f.form.valid && updateUserAddress()" #f="ngForm">                        
+            <table>     
+                 
+              <tr>
+                <td class="table-heading">
+                    <label for="street">Street</label>
+                  </td>
+                  <td>                    
+                      <input type="text"  class="form-control" name="street"  [value]="address.street" [(ngModel)]="address.street" #street="ngModel" 
+                      [class.is-invalid]="(f.submitted && street.invalid )" required>
+                      <small class="text-danger" *ngIf="(f.submitted && street.invalid) ">
+                        <div *ngIf="street.errors.required">*Street is required</div>
+                      </small>        
+                      
+                  </td>     
+                      
+              </tr> 
+              <tr>
+                <td class="table-heading">
+                    <label for="district">District</label>
+                  </td>
+                  <td>                   
+                      <input type="text" class="form-control" name="district"  [value]="address.district" [(ngModel)]="address.district" #district="ngModel" 
+                      [class.is-invalid]="(f.submitted && district.invalid )" required>
+                      <small class="text-danger" *ngIf="(f.submitted && district.invalid) ">
+                        <div *ngIf="district.errors.required">*District is required</div>
+                      </small>                     
+                  </td>             
+                           
+              </tr> 
+              <tr>
+                <td class="table-heading">
+                    <label for="state">State</label>
+                  </td>
+                  <td>
+                      
+                      <input type="text" class="form-control" name="state" [value]="address.state" [(ngModel)]="address.state" #state="ngModel"  
+                      [class.is-invalid]="(f.submitted && state.invalid )" required>
+                      <small class="text-danger" *ngIf="(f.submitted && state.invalid) ">
+                        <div *ngIf="state.errors.required">*State is required</div>
+                      </small>
+                      
+                  </td>              
+              </tr>
+              <tr>
+                <td class="table-heading">
+                    <label for="country">Country</label>
+                  </td>
+                  <td>
+                        <input type="text" class="form-control" name="country"  [value]="address.country"  [(ngModel)]="address.country" #country="ngModel" 
+                        [class.is-invalid]="(f.submitted && country.invalid )" required>   
+                      <small class="text-danger" *ngIf="(f.submitted && country.invalid) ">
+                        <div *ngIf="country.errors.required">*Country is required</div>
+                      </small> 
+                      
+                  </td>              
+              </tr> 
+              
+              <tr>
+                <td class="table-heading">
+                    <label for="pinCode">Pincode</label>
+                  </td>
+                  <td>                   
+                      <input type="text" class="form-control" name="pinCode"  [value]="address.pinCode" [(ngModel)]="address.pinCode" #pinCode="ngModel"
+                      [class.is-invalid]="(f.submitted && pinCode.invalid )" required minlength="6" maxlength="6">    
+                      <small class="text-danger" *ngIf="(f.submitted && pinCode.invalid) ">
+                        <div *ngIf="pinCode.errors.required">*Pincode is required</div>
+                        <div *ngIf="pinCode.errors.minlength">Pincode must be at least 6 characters</div>
+                        
+                      </small>               
+                  </td>              
+              </tr>
+              
+            <tr>            
+                  <td colspan=2 class="table-heading">
+                    <button class="button" type="submit">Save Address</button> 
+                </td>
+            </tr>
+          </table>           
+      </form> 
+      </div>
+       
+    </div>   
+
+  </body>
+</html>

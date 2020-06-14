@@ -1,0 +1,59 @@
+.ng-valid[required],.ng-valid.required
+{
+    border-left:5px solid green;
+}
+.ng-invalid:not(form)
+{
+    border-left:5px solid red;
+}
+#by
+{
+   
+   
+    text-align:center;
+}
+table
+{
+    background-color:white;
+    border-radius:25px;
+    font-family: Palatino, serif;
+    margin-left:auto; 
+    margin-right:auto; 
+    
+}
+
+
+
+
+td,th{
+    padding: 5px 10px;     
+    width:200px;
+}
+
+
+
+
+
+
+#reset
+{
+    background-color:darkgreen;
+}
+.title
+{
+	background-color:#37475a;	
+    height:100px;
+    color:white;
+    text-align:center;
+    
+}
+
+.heading
+{
+    color:#37475a;
+    font-weight:bold;	
+    height:50px;
+    width:100%;
+	text-align:center;
+}
+

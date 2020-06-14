@@ -1,0 +1,50 @@
+
+#prodDetail
+{
+    margin:100px;
+}
+
+
+
+#reviewTable {
+    font-family: Palatino, serif;
+    margin-top:50px;
+    margin-left:auto; 
+    margin-right:auto; 
+    width:45%;
+}
+
+td
+{
+width:350px;
+height:20px;
+font-size:20px;
+}
+.subTable
+{
+    font-size:15px;  
+}
+
+.header
+{
+	background-color:#37475a;	
+    height:100px;
+    width:100%;
+    color:white;
+    text-align:center;
+    
+}
+.navigationLinks
+{
+  float: right;
+}
+
+.mainLink
+{
+    color:white; 
+    padding: 15px;
+}
+.mainLink:hover
+{
+    color:#d7ec73;
+}

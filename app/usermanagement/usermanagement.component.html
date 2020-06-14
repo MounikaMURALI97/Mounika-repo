@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>User Management Page</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title"  >Vyntra Mart</h1>
+      <div class="navigationLinks">
+                        
+        <ul class="nav ">  
+          <li class="nav-item">
+            <a class="mainLink" routerLink="/adminhome">home</a>                         
+          </li>
+          <li class="nav-item">
+                <a class="mainLink" routerLink="/adminlogin" (click)="logout()">logout</a>                         
+          </li>
+       </ul>        
+                   
+   </div>
+    </header>
+    <div class="container text-center">
+      <h4 class="heading"> User Details List</h4>
+      <table class="table">
+        <tr>
+          <th>User Name</th>
+          <th>Gender</th>
+          <th>Gmail Id</th>
+          <th>Mobile Number</th>
+          <th>Address</th>
+          <th>Delete User</th>         
+        </tr>
+        <tr *ngFor="let user of users">
+            <td>{{user[0].firstName}}&nbsp;{{user.lastName}}</td>
+            <td>{{user[0].gender}}</td>
+            <td>{{user[0].gmailId}}</td>
+            <td>{{user[0].mobileNumber}}</td>
+            <td>{{user[1].street}},{{user[1].district}},{{user[1].state}},{{user[1].country}},{{user[1].pinCode}}</td>
+            <td><button class="button" (click)=deleteUser(user[0])>Delete</button></td>
+        </tr>
+      </table>
+    </div>
+    
+  </body>
+  
+</html>

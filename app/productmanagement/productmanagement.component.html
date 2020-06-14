@@ -1,0 +1,258 @@
+<html>
+  <head>
+    <title>Product Management Page</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title"  >Vyntra Mart</h1>
+      <div class="navigationLinks">
+                        
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="mainLink" routerLink="/adminhome">home</a>                         
+          </li> 
+          <li class="nav-item">
+              <a class="mainLink" routerLink="/adminlogin" (click)="logout()">logout</a>                         
+          </li>
+       </ul>                        
+      </div>
+   </header>
+   <div class="container text-center">    
+    <div class="new-product" *ngIf="isShown">
+      
+      <div class="product-form">  
+      <form name="form" (ngSubmit)="f.form.valid && saveProductDetails()"  #f="ngForm">         
+          <table *ngIf="product">             
+            <tr>
+              <td class="table-heading">
+                  <label for="pname">Product Name</label>
+                </td>
+                <td>                    
+                    <input type="text"  class="form-control" name="pname"  [(ngModel)]="product.pname" #pname="ngModel" 
+                    [class.is-invalid]="(f.submitted && pname.invalid )" required>
+                    
+                    <small class="text-danger" *ngIf="f.submitted && pname.invalid ">
+                      <div *ngIf="pname.errors.required">*Product name is required</div>
+                    </small>
+                    
+                </td>     
+                    
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="image">Product Image</label>
+                </td>
+                <td>                   
+                    <input type="file" class="form-control" name="image" (change)=saveImageDetails($event)> 
+                    
+                </td>             
+                         
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="price">Product Price</label>
+                </td>
+                <td>
+                    
+                    <input type="number" class="form-control" name="price" [(ngModel)]="product.price" #price="ngModel" 
+                    [class.is-invalid]="(f.submitted && price.invalid )" required/>
+                    <small class="text-danger" *ngIf="f.submitted && price.invalid ">
+                      <div *ngIf="price.errors.required">*Product price is required</div>
+                    </small>
+                    
+                    
+                </td>              
+            </tr>
+            <tr>
+              <td class="table-heading">
+                  <label for="offer">Product Offer</label>
+                </td>
+                <td>
+                      <input type="number" class="form-control" name="offer"  [(ngModel)]="product.offer" #offer="ngModel">
+                    
+                </td>              
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="offer">Product Quantity</label>
+                </td>
+                <td>
+                      <input type="number" class="form-control" name="quantity"  [(ngModel)]="product.quantity" #quantity="ngModel" 
+                      [class.is-invalid]="(f.submitted && quantity.invalid )" required/>
+                      <small class="text-danger" *ngIf="f.submitted && quantity.invalid ">
+                          <div *ngIf="quantity.errors.required">*Product quantity is required</div>
+                      </small>
+                </td>              
+            </tr> 
+            
+            <tr>
+              <td class="table-heading">
+                  <label for="description">Product Description</label>
+                </td>
+                <td>                   
+                    <input type="text" class="form-control" name="description" [(ngModel)]="product.description" #description="ngModel">                   
+                </td>              
+            </tr>
+            
+              <tr>
+               
+                   <td class="table-heading">
+                    <label for="cid">Select Category </label>
+                   </td>
+                   <div class="category-select" *ngFor="let category of categoryList">
+                    <td>                        
+                         <input type="radio" name="cid" value="{{category.cid}}"  [(ngModel)]="category.cid"  
+                         #cid="ngModel"  (click)="setCategory(category)" />{{category.cname}}
+                        
+                          
+                    </td>
+                  </div>
+              </tr>
+               
+          <tr> 
+            <td colspan=2 class="table-heading">              
+                <button class="button" type="submit">Save Product</button>               
+            </td>
+             
+          </tr>
+        </table> 
+      </form> 
+    </div>    
+   </div>
+   <div class="new-product" *ngIf="!isShown">
+    
+    <div class="product-form"> 
+    
+    <form name="form" (ngSubmit)="f.form.valid && updateProductDetails()"  #f="ngForm">         
+        <table *ngIf="product">             
+          <tr>
+            <td class="table-heading">
+                <label for="pname">Product Name</label>
+              </td>
+              <td>                    
+                  <input type="text"  class="form-control" name="pname"  [(ngModel)]="currentproduct.pname" #pname="ngModel" 
+                  [class.is-invalid]="(f.submitted && pname.invalid )" required>
+                    
+                    <small class="text-danger" *ngIf="f.submitted && pname.invalid ">
+                      <div *ngIf="pname.errors.required">*Product name is required</div>
+                    </small>
+                  
+                  
+              </td>     
+                  
+          </tr> 
+          <tr>
+            <td class="table-heading">
+                <label for="image">Product Image</label>
+              </td>
+              <td>                   
+                  <input type="file" class="form-control" name="image" (change)=saveImageDetails($event)  />
+                                 
+              </td>             
+                       
+          </tr> 
+          <tr>
+            <td class="table-heading">
+                <label for="price">Product Price</label>
+              </td>
+              <td>
+                  
+                  <input type="number" class="form-control" name="price" [(ngModel)]="currentproduct.price" #price="ngModel" 
+                  [class.is-invalid]="(f.submitted && price.invalid )" required/>
+                    <small class="text-danger" *ngIf="f.submitted && price.invalid ">
+                      <div *ngIf="price.errors.required">*Product price is required</div>
+                    </small>
+                  
+                  
+              </td>              
+          </tr>
+          <tr>
+            <td class="table-heading">
+                <label for="offer">Product Offer</label>
+              </td>
+              <td>
+                    <input type="number" class="form-control" name="offer"  [(ngModel)]="currentproduct.offer" #offer="ngModel"
+                    >
+                  
+              </td>              
+          </tr> 
+          <tr>
+            <td class="table-heading">
+                <label for="offer">Product Quantity</label>
+              </td>
+              <td>
+                    <input type="number" class="form-control" name="quantity"  [(ngModel)]="currentproduct.quantity" #quantity="ngModel"
+                    [class.is-invalid]="(f.submitted && quantity.invalid )" required/>
+                      <small class="text-danger" *ngIf="f.submitted && quantity.invalid ">
+                          <div *ngIf="quantity.errors.required">*Product quantity is required</div>
+                      </small>
+                  
+              </td>              
+          </tr> 
+          
+          <tr>
+            <td class="table-heading">
+                <label for="description">Product Description</label>
+              </td>
+              <td >                   
+                  <input type="text" class="form-control" name="description" [(ngModel)]="currentproduct.description" #description="ngModel">                   
+              </td>              
+          </tr>          
+            <tr>
+                <td class="table-heading">
+                  <label for="cid">Select Category </label>
+                </td>
+                 <div class="category-select" *ngFor="let category of categoryList">
+                  <td>                        
+                       <input type="radio" name="cid" value="{{category.cid}}" [(ngModel)]="category.cid"  #cid="ngModel" (click)="setUpdatedCategory(category)" 
+                       >{{category.cname}}
+                   
+                  </td>
+                </div>
+            </tr>
+             
+        <tr> 
+          <td colspan=2 class="table-heading">              
+              <button class="button" type="submit">Update Product</button>               
+          </td>
+           
+        </tr>
+      </table> 
+    </form> 
+  </div>    
+ </div>
+   <div class="view-products-list">
+    <h4 class="heading"> Products List</h4>
+    <table class= "table product-list"> 
+      <tr>
+        <th>Category</th>
+        <th>Product Image</th>
+        <th>Product Name</th>
+        <th>Product Availability</th>
+        <th>Product Price</th>
+        <th>Product Offer</th>
+        <th>Product Quantity</th>
+        <th>Product Description</th>
+        <th>Update Product</th>
+        <th>Delete Product</th>
+      </tr>    
+      <tr *ngFor="let p of prod">
+        <td>{{p.category.cname}}</td>
+        <td><img src="{{p.image}}" height="50px" width="50px"></td>
+        <td>{{p.pname}}</td>
+        <td>{{p.availabilbity}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.offer}}</td>
+        <td>{{p.quantity}}</td>
+        <td>{{p.description}}</td>
+        <td><button class="button" (click)=getProduct(p)>Update</button></td>
+        <td><button class="button"(click)=deleteProduct(p)>Delete</button></td>
+       
+      </tr>  
+    </table>
+  </div>
+ 
+   </div>
+   
+  </body>
+</html>

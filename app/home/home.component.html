@@ -1,0 +1,95 @@
+<html>
+     <head>
+          <title>Home page</title>
+     </head>
+     <body>
+          <div class="container-fluid header">
+               <h1 class="title"  >Vyntra Mart</h1>
+ 
+                    <div class="navigationLinks">
+                        
+                         <ul class="nav ">  
+                              <li class="nav-item">
+                                   <a class="mainLink" routerLink="/home">Home</a>                                                  
+                              </li>                           
+                              <li class="nav-item">
+                                   <a class="mainLink" routerLink="/profilepage">{{parsedjsonUser.firstName}}</a>                                                  
+                              </li>
+                              <li class="nav-item">
+                                   <a class="mainLink"  routerLink="/deliverylocation">Delivery Location</a>                                                  
+                              </li>
+                              <li class="nav-item">
+                                   <a class="mainLink"  routerLink="/orders">Order Details</a>                                                  
+                              </li> 
+                              <li class="nav-item">
+                                   <a class="mainLink"  routerLink="/cart">Cart</a>                                                  
+                              </li> 
+                             <li class="nav-item">
+                                   <a class="mainLink" routerLink="['']" (click)="logout()">logout</a>                         
+                             </li>
+                        </ul>        
+                                    
+                    </div>
+          </div>
+          <div class="row searchAndCategory">
+
+               <div class="col-md-3 dropdownitems" > 
+                    <label for="selectCategory">Select Category: </label>
+                    <select required [(ngModel)]="categoryId" id="selectCategory" name="selectCategory" (ngModelChange)="displayProductsByCategory(categoryId)">
+                         
+                         <option *ngFor="let cat of categoryList"  value="{{cat.cid}}" >
+                              {{cat.cname}}
+                         </option>
+                    </select>                                                  
+               </div>
+               
+               <div class="col-md-4 search">
+                    <form class="searchForm">
+                         <table class="searchTable">
+                              <tr>
+                                   <td>
+                                        <input type="text" name="productName" placeholder="Enter product name" [(ngModel)]="productName" id="productName"/>
+                                       
+                                   </td>
+                                   <td>
+                                        <input type="button" value="search" name="searchButton" (click)="searchProduct()"/>
+                                   </td>
+                              </tr>
+                         </table>
+                         
+                    </form>
+               </div>
+          </div>
+          
+          <div class="container productsList">
+               <div class="row">
+                    <div class="col-md-4" *ngFor="let p of productsList;let i=index">                   
+                        <a routerLink="/productpage" (click)="getSelectedProduct(p)">
+                              <img class="custom-image-style" img src="{{p.image}}" height="200" width="200" style="margin-left: 60px;
+                              margin-top: 10px">
+                        </a> 
+                         <div class="book-desc-container row">
+                             <div class="product-description">
+                                 <p style="margin-left: 70px"><strong>{{p.pname}}:&nbsp;${{p.price}}&nbsp;offer:{{p.offer}}%</strong></p>                               
+                             </div>  
+                             <table class="offset-md-2 buy-now">
+                                  <tr>
+                                       <td>
+                                        <button class="button" (click)="addToCart(p.pid)">Add to Cart</button>    
+                                       </td>
+                                       <td>
+                                        &nbsp;<button class="button" (click)="redirectToPayment(p)" type="button" >buy Now</button>
+                                       </td>
+                                  </tr>
+                             </table>                       
+                         </div>                 
+                 </div>
+             </div>
+          </div>
+
+     </body>
+</html>
+
+
+
+

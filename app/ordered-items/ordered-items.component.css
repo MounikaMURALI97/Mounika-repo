@@ -1,0 +1,56 @@
+
+td
+{
+    width:200px;
+    height:150px;
+    text-align:center;
+    font-size: 15px;
+}
+th{
+    text-align: center;
+}
+
+
+table {
+    font-family: Palatino, serif;
+    margin-top:50px;
+    margin-left:auto; 
+    margin-right:auto; 
+    width:70%;
+}
+.heading
+{
+    color:#37475a;
+    font-weight:bold;	
+    height:50px;
+    width:100%;
+    text-align:center;
+    margin-top: 50px;
+}
+
+.header
+{
+	background-color:#37475a;	
+    height:100px;
+    width:100%;
+    color:white;
+    text-align:center;
+    
+}
+.navigationLinks
+{
+  float: right;
+}
+
+.mainLink
+{
+    
+    color:white;  
+      
+    padding: 15px;
+   
+}
+.mainLink:hover
+{
+    color:#d7ec73;
+}

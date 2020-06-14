@@ -1,0 +1,49 @@
+.header
+{
+	background-color:#37475a;	
+    height:100px;
+    width:100%;
+    color:white;
+    text-align:center;
+    
+}
+.navigationLinks
+{
+  float: right;
+}
+
+.mainLink
+{
+    
+    color:white;  
+      
+    padding: 15px;
+   
+}
+.mainLink:hover
+{
+    color:#d7ec73;
+}
+
+table {
+    font-family: Palatino, serif;
+    margin-top:100px;
+    margin-left:auto; 
+    margin-right:auto; 
+    width:70%;
+}
+
+td{
+    padding: 5px 10px;     
+    text-align: left; 
+}
+.table-heading{
+    text-align: right;
+}
+.button
+{
+    border-radius:2px;
+    background: #96ccf8;
+    border:1px solid #96ccf8;
+    font-size:15px;
+}

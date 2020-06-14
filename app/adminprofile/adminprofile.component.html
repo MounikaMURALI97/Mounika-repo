@@ -1,0 +1,351 @@
+<html>
+    <head>
+        <title>Profile Page</title>
+    </head>
+    <body>
+        <div class="container-fluid header">
+            <h1 class="title"  >VCart Online Shopping System</h1>
+
+                 <div class="navigationLinks">
+                     
+                      <ul class="nav ">  
+                           <li class="nav-item">
+                                <a class="mainLink" routerLink="/adminhome">home</a>                                                  
+                           </li>                                                    
+                          <li class="nav-item">
+                                <a class="mainLink" routerLink="/adminlogin" (click)="logout()">logout</a>                         
+                          </li>
+                     </ul>       
+                                 
+                 </div>
+
+       </div>
+       <div class="container text-center">   
+         
+        <small class="text-danger">{{errorMessage}}</small> 
+        <div  class="user-details" *ngIf="user"> 
+         <form name="form" (ngSubmit)="f.form.valid && updateUserDetails()" #f="ngForm">                      
+            <table>        
+              <tr>
+                <td class="table-heading">
+                    <label for="firstName">First Name</label>
+                  </td>
+                  <td>
+                      <div *ngIf="!isShown">
+                      <input type="text"  class="form-control" name="firstName"  [value]="user.firstName" disabled >
+                      </div>
+                      <div  *ngIf="isShown">
+                        <input type="text" class="form-control" name="firstName" placeholder="Enter First Name"  [(ngModel)]="user.firstName" #firstName="ngModel" 
+                        [class.is-invalid]="(f.submitted && firstName.invalid )" required/>
+                        <small class="text-danger" *ngIf="(f.submitted && firstName.invalid) ">
+                          <div *ngIf="firstName.errors.required">*First Name is required</div>
+                        </small>
+                      </div>
+                  </td>     
+                      
+              </tr> 
+              <tr>
+                  <td class="table-heading">
+                    <label for="lastName">Last Name</label>
+                  </td>
+                  <td>
+                      <div *ngIf="!isShown">
+                      <input type="text" class="form-control" name="lastName"  [value]="user.lastName" disabled >
+                      </div>
+                      <div *ngIf="isShown">
+                        <input type="text" class="form-control" name="lastName" placeholder="Enter Last Name" required [(ngModel)]="user.lastName" #lastName="ngModel" 
+                        [class.is-invalid]="(f.submitted && lastName.invalid )"/>
+                        <small class="text-danger" *ngIf="(f.submitted && lastName.invalid) ">
+                          <div *ngIf="lastName.errors.required">*Last Name is required</div>
+                        </small>       
+                      </div>
+                  </td>  
+                  
+                           
+              </tr> 
+              <tr>
+                <td class="table-heading">
+                    <label for="gmailId">Gmail Id</label>
+                  </td>
+                  <td>
+                    <div *ngIf="!isShown">
+                      <input type="text" class="form-control" name="gmailId"   [value]="user.gmailId" disabled >
+                   </div>
+                   <div *ngIf="isShown">
+                     <input type="text" class="form-control" name="gmailId" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="user.gmailId"   [value]="user.gmailId" #gmailId="ngModel"
+                     [class.is-invalid]="(f.submitted && gmailId.invalid )" required/>
+                     <small class="text-danger" *ngIf="(f.submitted && gmailId.invalid) ">
+                       <div *ngIf="gmailId.errors.required">*Gmail Id is required</div>
+                       <div *ngIf="gmailId.errors.pattern">Gmail Id must be valid</div>
+                     </small>       
+                   </div>
+                  </td>              
+              </tr>
+              <tr>
+                <td class="table-heading">
+                    <label for="gender">Gender</label>
+                  </td>
+                  <td>
+                      <div *ngIf="!isShown">
+                        <input type="text" class="form-control" name="gender"   [value]="user.gender" disabled >
+                      </div>
+                      <div *ngIf="isShown">
+                        <input type="radio"  name="gender" autocomplete="name" value="male" [(ngModel)]="user.gender" #gender="ngModel" >Male<br>
+                        <input type="radio"  name="gender" autocomplete="name" value="female" [(ngModel)]="user.gender" #gender="ngModel" >Female
+                      </div>
+                  </td>              
+              </tr> 
+              
+              <tr>
+                <td class="table-heading">
+                    <label for="mobileNumber">Mobile Number</label>
+                  </td>
+                  <td>
+                      <div *ngIf="!isShown">
+                      <input type="text" class="form-control" name="mobileNumber"  [value]="user.mobileNumber" disabled >
+                      </div>
+                      <div *ngIf="isShown">
+                        <input type="text" class="form-control" name="mobileNumber" placeholder="Enter Mobile Number" [(ngModel)]="user.mobileNumber" #mobileNumber="ngModel"
+                        [class.is-invalid]="(f.submitted && mobileNumber.invalid )" required pattern="[789][0-9]{9}"/>
+                         <small class="text-danger" *ngIf="(f.submitted && mobileNumber.invalid) ">                          
+                          <div *ngIf="mobileNumber.errors.pattern">Mobile Number must be valid</div>
+                          <div *ngIf="mobileNumber.errors.required">*Mobile Number is required</div>
+                          </small>
+                        
+                      </div>
+                  </td>              
+              </tr>
+              
+            <tr>              
+               <td colspan=2 style="text-align:center" >
+                <div *ngIf="!isShown">
+                    <button class="button" (click)=enable() type="button">Edit</button> 
+                </div>
+                <div *ngIf="isShown">
+                    <button class="button"  type="submit">Save Changes</button> 
+                </div>
+                             
+                </td>
+            </tr>
+          </table>              
+      </form>
+    </div>
+       
+    <div class="new-address-group" *ngIf="!address"> 
+      <form name="form" (ngSubmit)="f.form.valid && saveUserAddress()" #f="ngForm">
+       
+          <table>             
+            <tr>
+              <td class="table-heading">
+                  <label for="street">Street</label>
+                </td>
+                <td>                    
+                    <input type="text"  class="form-control" name="street"   [(ngModel)]="newAddress.street" #street="ngModel" 
+                    [class.is-invalid]="(f.submitted && street.invalid)" required>
+                    <small class="text-danger" *ngIf="(f.submitted && street.invalid) ">
+                      <div *ngIf="street.errors.required">*Street is required</div>
+                    </small>
+                </td>     
+                    
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="district">District</label>
+                </td>
+                <td>                   
+                    <input type="text" class="form-control" name="district"  [(ngModel)]="newAddress.district" #district="ngModel" 
+                    [class.is-invalid]="(f.submitted && district.invalid )" required>
+                    <small class="text-danger" *ngIf="(f.submitted && district.invalid) ">
+                      <div *ngIf="district.errors.required">*District is required</div>
+                    </small>                    
+                </td>             
+                         
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="state">State</label>
+                </td>
+                <td>
+                    
+                    <input type="text" class="form-control" name="state"  [(ngModel)]="newAddress.state" #state="ngModel" 
+                    [class.is-invalid]="(f.submitted && state.invalid )" required>
+                    <small class="text-danger" *ngIf="(f.submitted && state.invalid) ">
+                      <div *ngIf="state.errors.required">*State is required</div>
+                    </small>
+                    
+                </td>              
+            </tr>
+            <tr>
+              <td class="table-heading">
+                  <label for="country">Country</label>
+                </td>
+                <td>
+                      <input type="text" class="form-control" name="country"  [(ngModel)]="newAddress.country" #country="ngModel"
+                      [class.is-invalid]="(f.submitted && country.invalid )" required>
+                      <small class="text-danger" *ngIf="(f.submitted && country.invalid) ">
+                        <div *ngIf="country.errors.required">*Country is required</div>
+                      </small>
+                    
+                </td>              
+            </tr> 
+            
+            <tr>
+              <td class="table-heading">
+                  <label for="pinCode">Pincode</label>
+                </td>
+                <td>                   
+                    <input type="text" class="form-control" name="pinCode"  [(ngModel)]="newAddress.pinCode" #pinCode="ngModel"
+                    [class.is-invalid]="(f.submitted && pinCode.invalid )" required minlength="6" maxlength="6">   
+                    <small class="text-danger" *ngIf="(f.submitted && pinCode.invalid) ">
+                      <div *ngIf="pinCode.errors.required">*Pincode is required</div>
+                      <div *ngIf="pinCode.errors.minlength">Pincode must be at least 6 characters</div>
+                     
+                    </small>                
+                </td>              
+            </tr>
+            
+          <tr>            
+                <td colspan=2 style="text-align: center;" class="table-heading">
+                  <button class="button"  type="submit">Save Address</button> 
+               
+              </td>
+          </tr>
+        </table>        
+      </form> 
+    </div>
+    <div class="address-group" *ngIf="address">
+      <form name="form" (ngSubmit)="f.form.valid && updateUserAddress()" #f="ngForm">  
+          <table>       
+            <tr>
+              <td class="table-heading">
+                  <label for="street">Street</label>
+                </td>
+                <td>                    
+                    <input type="text"  class="form-control" name="street"  [value]="address.street" [(ngModel)]="address.street" #street="ngModel" 
+                    [class.is-invalid]="(f.submitted && street.invalid )" required>
+                    <small class="text-danger" *ngIf="(f.submitted && street.invalid) ">
+                      <div *ngIf="street.errors.required">*Street is required</div>
+                    </small>               
+                </td>         
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="district">District</label>
+                </td>
+                <td>                   
+                    <input type="text" class="form-control" name="district" [value]="address.district" [(ngModel)]="address.district" #district="ngModel" 
+                    [class.is-invalid]="(f.submitted && district.invalid )" required>
+                    <small class="text-danger" *ngIf="(f.submitted && district.invalid) ">
+                      <div *ngIf="district.errors.required">*District is required</div>
+                    </small>                     
+                </td>                     
+            </tr> 
+            <tr>
+              <td class="table-heading">
+                  <label for="state">State</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="state"  [value]="address.state" [(ngModel)]="address.state" #state="ngModel"  
+                    [class.is-invalid]="(f.submitted && state.invalid )" required>
+                    <small class="text-danger" *ngIf="(f.submitted && state.invalid) ">
+                      <div *ngIf="state.errors.required">*State is required</div>
+                    </small>
+                    
+                </td>              
+            </tr>
+            <tr>
+              <td class="table-heading">
+                  <label for="country">Country</label>
+                </td>
+                <td>
+                      <input type="text" class="form-control" name="country"   [value]="address.country"  [(ngModel)]="address.country" #country="ngModel" 
+                      [class.is-invalid]="(f.submitted && country.invalid )" required>   
+                    <small class="text-danger" *ngIf="(f.submitted && country.invalid) ">
+                      <div *ngIf="country.errors.required">*Country is required</div>
+                    </small> 
+                    
+                </td>              
+            </tr> 
+            
+            <tr>
+              <td class="table-heading">
+                  <label for="pinCode">Pincode</label>
+                </td>
+                <td>                   
+                    <input type="text" class="form-control" name="pinCode" [value]="address.pinCode" [(ngModel)]="address.pinCode" #pinCode="ngModel"
+                    [class.is-invalid]="(f.submitted && pinCode.invalid )" required minlength="6" maxlength="6">    
+                    <small class="text-danger" *ngIf="(f.submitted && pinCode.invalid) ">
+                      <div *ngIf="pinCode.errors.required">*Pincode is required</div>
+                      <div *ngIf="pinCode.errors.minlength">Pincode must be at least 6 characters</div>
+                      
+                    </small>               
+                </td>              
+            </tr>
+            
+          <tr>            
+                <td colspan=2 style="text-align: center;" class="table-heading">
+                  <button class="button" type="submit">Save Address</button> 
+              </td>
+          </tr>
+        </table>           
+    </form> 
+    </div>
+    </div>   
+    
+    <small class="text-danger">{{errorMessage}}</small>  
+    <div  class="user-details" *ngIf="user"> 
+      <form name="form" (ngSubmit)="ff.form.valid && updateUserDetails()" #ff="ngForm" >                      
+         <table>        
+           <tr>
+             <td class="table-heading">
+                 <label for="password">Password</label>
+               </td>
+               <td>
+                   <div *ngIf="!issShown">
+                   <input type="password"  class="form-control" name="password" [value]="user.password" disabled >
+                   </div>
+                   <div  *ngIf="issShown">
+                     <input type="password" class="form-control" name="password" #password="ngModel" placeholder="Enter New  Password"  [(ngModel)]="user.password"  
+                     [class.is-invalid]="(ff.submitted && password.invalid )" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required/>
+                     <small class="text-danger" *ngIf="(ff.submitted && password.invalid) ">
+                       <div *ngIf="password.errors.required">*Password is required</div>
+                       <div *ngIf="password.errors.pattern">Password must contain one number,Uppercase and lowercase letter,Password must be 8-16 long</div>
+                     </small>
+                   </div>
+               </td>     
+           </tr>
+
+           <tr>
+            
+             <td class="table-heading">
+                <div  *ngIf="issShown">
+                 <label for="password">Confirm Password</label>
+                 </div>
+               </td>
+               <td>
+                <div  *ngIf="issShown">                   
+                     <input type="password" class="form-control" name="ConformPassword" #ConformPassword="ngModel" placeholder="Enter Confirm Password"  [(ngModel)]="user.conformPassword"  
+                     [class.is-invalid]="(ff.submitted && ConformPassword.invalid )" pattern="{{user.password}}" required/>
+                     <small class="text-danger" *ngIf="(ff.submitted && ConformPassword.invalid) ">
+                       <div *ngIf="ConformPassword.errors.required">*Confirm Password is required</div>
+                       <div *ngIf="ConformPassword.errors.pattern">Password and confirm Password must be same</div>
+                     </small>
+                   </div>
+               </td>     
+           </tr>
+           <tr>              
+             <td colspan=2 style="text-align:center" >
+              <div *ngIf="!issShown">
+                  <button class="button" (click)=enablee() type="button">Reset Password</button> 
+              </div>
+              <div *ngIf="issShown">
+                  <button class="button"  type="submit">Update</button> 
+              </div>
+                           
+              </td>
+          </tr>
+         </table>              
+       </form>
+       </div>
+    </body>
+</html>

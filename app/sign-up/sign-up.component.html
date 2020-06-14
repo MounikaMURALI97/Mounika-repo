@@ -1,0 +1,132 @@
+
+<html>
+  <head>SignUp</head>
+
+
+<body>
+  
+
+    <h1 class="title"  >Vyntra Mart</h1>
+    <div class="container text-center">      
+      <h4 class="heading">SignUp</h4>     
+      <small class="text-danger">{{errorMessage}}</small>
+
+
+
+  
+  <div id="by">
+    
+  <form name="form" #f="ngForm" novalidate style="text-align:center">
+    <table style="text-align:center">
+      <tr>
+    <div class="form-group">
+      <td><label for="firstName">FirstName</label></td>
+      <td><input type="text" required pattern="[A-Za-z]{3,}" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" class="form-control" id="firstName"></td>
+    </div>
+    
+    <td><div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+      class="alert alert-danger">
+  
+    <div *ngIf="firstName.errors.required">
+      <small class="text-danger">*Name is required</small>
+    </div>
+    <div *ngIf="firstName.errors.pattern">
+      <small class="text-danger"> First Name must be valid</small>
+    </div>
+    </div></td></tr>
+  
+    <tr><div class="form-group">
+      <td><label for="lastName">LastName</label></td>
+      <td><input type="text" required [(ngModel)]="user.lastName" pattern="[A-Za-z]{1,}" name="lastName" #lastName="ngModel" class="form-control" id="lastName"><td></td>
+    </div>
+  <td><div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+      class="alert alert-danger">
+  
+    <div *ngIf="lastName.errors.required">
+      <small class="text-danger">*Last Name is required</small>
+    </div>
+    <div *ngIf="lastName.errors.pattern">
+      <small class="text-danger">Last Name must be valid</small>
+    </div>
+    </div></td></tr>
+
+
+    <tr><div class="form-group">
+      <td><label for=" gmailId">EmailId</label></td>
+      <td><input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required [(ngModel)]="user. gmailId" name="emailId" #emailId="ngModel" class="form-control" id="emailId"></td>
+    </div>
+  <td><div *ngIf="emailId.invalid && (emailId.dirty || emailId.touched)"
+      class="alert alert-danger">
+  
+    <div *ngIf="emailId.errors.required">
+      <small class="text-danger">*EmailId is required</small>
+    </div>
+    <div *ngIf="emailId.errors.pattern">
+      <small class="text-danger">emailId must be valid</small>
+    </div>
+    </div></td></tr>
+
+    <tr><div class="form-group">
+      <td><label for=" mobileNumber">Mobile Numer</label></td>
+    <td><input type="tel" pattern="[789][0-9]{9}" required [(ngModel)]="user.mobileNumber" name="mobileNo" #mobileNo="ngModel" class="form-control" id="mobileNo"></td>
+    </div>
+  <td><div *ngIf="mobileNo.invalid && (mobileNo.dirty || mobileNo.touched)"
+      class="alert alert-danger">
+  
+    <div *ngIf="mobileNo.errors.required">
+      <small class="text-danger">*Mobile number is required</small>
+    </div>
+    <div *ngIf="mobileNo.errors.pattern">
+      <small class="text-danger">Mobile number must be valid</small>
+    </div>
+    </div></td></tr>
+
+    <tr><div class="form-group">
+    <td><label for="password">Password</label></td>
+  <td><input type="password" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" [(ngModel)]="user.password" name="password" #password="ngModel" class="form-control" id="password"></td>
+    </div>
+  <td><div *ngIf="password.invalid && (password.dirty || password.touched)"
+      class="alert alert-danger">
+  
+    <div *ngIf="password.errors.required">
+      <small class="text-danger">*password is required</small>
+    </div>
+    <div *ngIf="password.errors.pattern">
+      <small class="text-danger">Password must contain one number,Uppercase and lowercase letter,Password must be 8-16 long</small>
+    </div>
+    </div></td></tr>
+
+
+
+    <tr><div class="form-group">
+      <td><label for="password">Confirm Password</label></td>
+    <td><input type="password" required   name="conformPassword" [(ngModel)]="user.conformPassword" #conformPassword="ngModel" class="form-control" id="conformPassword" pattern="{{password.value}}"></td>
+      </div>
+    <td><div *ngIf="conformPassword.invalid && (conformPassword.dirty || conformPassword.touched)"
+        class="alert alert-danger">
+    
+      <div *ngIf="conformPassword.errors.required">
+        <small class="text-danger">*Confirm password is required</small>
+      </div>
+     
+      <div *ngIf="conformPassword.errors.pattern">
+        <small class="text-danger"> Password and confirm Password must be same</small>
+      </div>
+      </div></td></tr>
+    <tr>
+      <td colspan="2">
+        <button class="btn btn-success" [disabled]="f.form.pristine || f.form.invalid" (click)="createUser()">SignUp</button>
+      
+       &nbsp;&nbsp; <input type="reset" id="reset" name="reset" value="reset"/>
+      </td></tr>
+    </table></form>
+
+  </div>
+  <div class="signup">
+    <p>------or-------</p>
+    Existing User?&nbsp;<a class="inline_block" [routerLink]="['']">Login</a>  
+  </div>  
+</div>
+  
+</body>
+</html>

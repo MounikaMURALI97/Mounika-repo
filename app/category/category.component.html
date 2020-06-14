@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>Category Management</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title"  >Vyntra Mart</h1>
+      <div class="navigationLinks">
+                        
+        <ul class="nav">  
+          <li class="nav-item">
+            <a class="mainLink" routerLink="/adminhome">home</a>                         
+          </li>             
+          <li class="nav-item">
+              <a class="mainLink" routerLink="/adminlogin" (click)="logout()">logout</a>                         
+          </li>
+       </ul>                        
+      </div>
+   </header>
+   <div class="container text-center">
+    <div class="new-product">
+      <small class="text-danger">{{errorMessage}}</small> 
+      <div class="category-form"> 
+      <form name="form" (ngSubmit)="f.form.valid && saveCategorytDetails(category)" #f="ngForm">          
+          <table>            
+            <tr>
+              <td class="table-heading">
+                  <label for="cname">Category Name</label>
+                </td>
+                <td>                    
+                    <input type="text" class="form-control" name="cname" [(ngModel)]="category.cname" #cname="ngModel" 
+                    [class.is-invalid]="(f.submitted && cname.invalid )" required>
+                    <small class="text-danger" *ngIf="(f.submitted && cname.invalid) ">
+                      <div *ngIf="cname.errors.required">*Category Name is required</div>
+                    </small>                   
+                </td>              
+            </tr>
+          <tr> 
+            <td class="table-heading">              
+                <button class="button"  type="submit">Save Category</button>               
+            </td>
+              <td>
+                <input class="button" (click)=createNewCategory() type="reset">
+              </td>
+          </tr>
+        </table>         
+      </form> 
+    </div>    
+   </div>
+   <div class="view-category-list">
+     <h4 class="heading">Category List</h4>
+    <table class= "table category-list"> 
+      <tr>
+        <th>Category Name</th>
+        <th>Update Category</th>
+        <th>Delete Category</th>        
+      </tr>    
+      <tr *ngFor="let c of categoryList">
+        <td>{{c.cname}}</td>     
+        <td><button class="button" (click)=getCategory(c)>Update</button></td>
+        <td><button class="button"(click)=deleteCategory(c)>Delete</button></td>
+      </tr>
+    </table>
+  </div>
+ 
+   </div>
+  </body>
+
+</html>

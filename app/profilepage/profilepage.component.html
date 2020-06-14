@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <title>Profile Page</title>
+    </head>
+    <body>
+        <div class="container-fluid header">
+            <h1 class="title"  >Vyntra Mart</h1>
+
+                 <div class="navigationLinks">
+                     
+                  <ul class="nav ">  
+                    <li class="nav-item">
+                         <a class="mainLink" routerLink="/home">Home</a>                                                  
+                    </li>                           
+                    <li class="nav-item">
+                         <a class="mainLink" routerLink="/adminprofile">{{parsedjsonUser.firstName}}</a>                                                  
+                    </li>
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/deliverylocation">Delivery Location</a>                                                  
+                    </li>
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/orders">Order Details</a>                                                  
+                    </li> 
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/cart">Cart</a>                                                  
+                    </li> 
+                   <li class="nav-item">
+                         <a class="mainLink" routerLink="['']" (click)="logout()">logout</a>                         
+                   </li>
+              </ul>      
+                                 
+                 </div>
+
+       </div>
+       <div class="container text-center">   
+         
+
+        <small class="text-danger">{{errorMessage}}</small>  
+        <div  class="user-details" *ngIf="user"> 
+          <form name="form" (ngSubmit)="f.form.valid && updateUserDetails()" #f="ngForm" >                      
+             <table>        
+               <tr>
+                 <td class="table-heading">
+                     <label for="firstName">First Name</label>
+                   </td>
+                   <td>
+                       <div *ngIf="!isShown">
+                       <input type="text"  class="form-control" name="firstName" [value]="user.firstName" disabled >
+                       </div>
+                       <div  *ngIf="isShown">
+                         <input type="text" class="form-control" name="firstName" placeholder="Enter First Name"  [(ngModel)]="user.firstName" #firstName="ngModel" 
+                         [class.is-invalid]="(f.submitted && firstName.invalid )" required/>
+                         <small class="text-danger" *ngIf="(f.submitted && firstName.invalid) ">
+                           <div *ngIf="firstName.errors.required">*First Name is required</div>
+                         </small>
+                       </div>
+                   </td>     
+                       
+               </tr> 
+               <tr>
+                   <td class="table-heading">
+                     <label for="lastName">Last Name</label>
+                   </td>
+                   <td>
+                       <div *ngIf="!isShown">
+                       <input type="text" class="form-control" name="lastName" [value]="user.lastName" disabled >
+                       </div>
+                       <div *ngIf="isShown">
+                         <input type="text" class="form-control" name="lastName" placeholder="Enter Last Name"  [(ngModel)]="user.lastName" #lastName="ngModel" 
+                         [class.is-invalid]="(f.submitted && lastName.invalid )"/>
+                         <small class="text-danger" *ngIf="(f.submitted && lastName.invalid) ">
+                           <div *ngIf="lastName.errors.required">*Last Name is required</div>
+                         </small>       
+                       </div>
+                   </td>  
+                   
+                            
+               </tr> 
+               <tr>
+                 <td class="table-heading">
+                     <label for="gmailId">Gmail Id</label>
+                   </td>
+                   <td>
+                    <div *ngIf="!isShown">
+                       <input type="text" class="form-control" name="gmailId"   [value]="user.gmailId" disabled >
+                    </div>
+                    <div *ngIf="isShown">
+                      <input type="text" class="form-control" name="gmailId" [(ngModel)]="user.gmailId"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [value]="user.gmailId" #gmailId="ngModel"
+                      [class.is-invalid]="(f.submitted && gmailId.invalid )" required/>
+                      <small class="text-danger" *ngIf="(f.submitted && gmailId.invalid) ">
+                        <div *ngIf="gmailId.errors.required">*Gmail Id is required</div>
+                        <div *ngIf="gmailId.errors.pattern">Gmail Id must be valid</div>
+                      </small>       
+                    </div>
+                       
+                   </td>              
+               </tr>
+               <tr>
+                 <td class="table-heading">
+                     <label for="gender">Gender</label>
+                   </td>
+                   <td>
+                       <div *ngIf="!isShown">
+                         <input type="text" class="form-control" name="gender" [value]="user.gender" disabled >
+                       </div>
+                       <div *ngIf="isShown">
+                         <input type="radio"  name="gender" autocomplete="name" value="male" [(ngModel)]="user.gender" #gender="ngModel" >Male<br>
+                         <input type="radio"  name="gender" autocomplete="name" value="female" [(ngModel)]="user.gender" #gender="ngModel" >Female
+                       </div>
+                   </td>              
+               </tr> 
+               
+               <tr>
+                 <td class="table-heading">
+                     <label for="mobileNumber">Mobile Number</label>
+                   </td>
+                   <td>
+                       <div *ngIf="!isShown">
+                       <input type="text" class="form-control" name="mobileNumber"  [value]="user.mobileNumber" disabled >
+                       </div>
+                       <div *ngIf="isShown">
+                         <input type="text" class="form-control" name="mobileNumber" placeholder="Enter Mobile Number"  [(ngModel)]="user.mobileNumber" #mobileNumber="ngModel" 
+                         [class.is-invalid]="(f.submitted && mobileNumber.invalid )" required pattern="[789][0-9]{9}"/>
+                         <small class= "text-danger" *ngIf="(f.submitted && mobileNumber.invalid)">                          
+                          <div *ngIf="mobileNumber.errors.pattern">mobile Number must be valid</div>
+                          <div *ngIf="mobileNumber.errors.required">*Mobile Number is required</div>
+                        </small> 
+                       </div>
+                   </td>              
+               </tr>
+             <tr>              
+                <td colspan=2 style="text-align:center" >
+                 <div *ngIf="!isShown">
+                     <button class="button" (click)=enable() type="button">Edit</button> 
+                 </div>
+                 <div *ngIf="isShown">
+                     <button class="button"  type="submit">Save Changes</button> 
+                 </div>
+                              
+                 </td>
+             </tr>
+           </table>              
+       </form>
+     </div>
+
+    <small class="text-danger">{{errorMessage}}</small>  
+    <div  class="user-details" *ngIf="user"> 
+      <form name="form" (ngSubmit)="ff.form.valid && updateUserDetails()" #ff="ngForm" >                      
+         <table>        
+           <tr>
+             <td class="table-heading">
+                 <label for="password">Password</label>
+               </td>
+               <td>
+                   <div *ngIf="!issShown">
+                   <input type="password"  class="form-control" name="password" [value]="user.password" disabled >
+                   </div>
+                   <div  *ngIf="issShown">
+                     <input type="password" class="form-control" name="password" #password="ngModel" placeholder="Enter New  Password"  [(ngModel)]="user.password"  
+                     [class.is-invalid]="(ff.submitted && password.invalid )" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required/>
+                     <small class="text-danger" *ngIf="(ff.submitted && password.invalid) ">
+                       <div *ngIf="password.errors.required">*Password is required</div>
+                       <div *ngIf="password.errors.pattern">Password must contain one number,Uppercase and lowercase letter,Password must be 8-16 long</div>
+                     </small>
+                   </div>
+               </td>     
+           </tr>
+
+           <tr>
+            
+             <td class="table-heading">
+                <div  *ngIf="issShown">
+                 <label for="password">Confirm Password</label>
+                 </div>
+               </td>
+               <td>
+                <div  *ngIf="issShown">                   
+                     <input type="password" class="form-control" name="ConformPassword" #ConformPassword="ngModel" placeholder="Enter Confirm Password"  [(ngModel)]="user.conformPassword"  
+                     [class.is-invalid]="(ff.submitted && ConformPassword.invalid )" pattern="{{user.password}}" required/>
+                     <small class="text-danger" *ngIf="(ff.submitted && ConformPassword.invalid) ">
+                       <div *ngIf="ConformPassword.errors.required">*Confirm Password is required</div>
+                       <div *ngIf="ConformPassword.errors.pattern">Password and confirm Password must be same</div>
+                     </small>
+                   </div>
+               </td>     
+           </tr>
+           <tr>              
+             <td colspan=2 style="text-align:center" >
+              <div *ngIf="!issShown">
+                  <button class="button" (click)=enablee() type="button">Reset Password</button> 
+              </div>
+              <div *ngIf="issShown">
+                  <button class="button"  type="submit">Update</button> 
+              </div>
+                           
+              </td>
+          </tr>
+         </table>              
+       </form>
+       </div>
+     
+      </div> 
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Ordered Items Details</title>
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid header">
+        <h1 class="title"  >Vyntra Mart</h1>
+
+             <div class="navigationLinks">
+                 
+              <ul class="nav ">  
+                <li class="nav-item">
+                     <a class="mainLink" routerLink="/home">Home</a>                                                  
+                </li>                           
+                <li class="nav-item">
+                     <a class="mainLink" routerLink="/profilepage">{{parsedjsonUser.firstName}}</a>                                                  
+                </li>
+                <li class="nav-item">
+                     <a class="mainLink"  routerLink="/deliverylocation">Delivery Location</a>                                                  
+                </li>
+                <li class="nav-item">
+                     <a class="mainLink"  routerLink="/orders">Order Details</a>                                                  
+                </li> 
+                <li class="nav-item">
+                     <a class="mainLink"  routerLink="/cart">Cart</a>                                                  
+                </li> 
+               <li class="nav-item">
+                     <a class="mainLink" routerLink="['']" (click)="logout()">logout</a>                         
+               </li>
+          </ul>            
+                             
+             </div>
+      </div>      
+    </header>
+    <table class="ordered-items" *ngFor="let orderItemsDetails of orderedItems">
+     
+        <tr>
+          <td>
+              Recipient:
+          </td>
+          <td colspan=3>
+            {{orderItemsDetails.order.userIdPayment.firstName}}
+          </td>
+        </tr>
+        <tr>
+          <td>Order Status:</td>
+          <td>{{orderItemsDetails.order.orderStatus}}</td>
+          <td>Order Date and Time</td>
+          <td>{{orderItemsDetails.order.orderDate}}</td>          
+        </tr>
+        <tr>
+          <td>Payment Type:</td>
+          <td>{{orderItemsDetails.order.paymentIdType.paymentTypeName}}</td>
+          <td>Payment Status:</td>
+          <td>{{orderItemsDetails.order.paymentStatus}}</td>
+        </tr>        
+        <tr>
+          <td >
+            Item Ordered:&nbsp;{{orderItemsDetails.orderedProducts.pname}}
+          </td>
+          <td colspan=3>           
+            <img class="custom-image-style" img src="{{orderItemsDetails.orderedProducts.image}}" height="100" width="100">
+          </td>
+          
+                   
+        </tr>        
+        <tr>
+          <td>
+            Quantity:
+          </td>
+          <td colspan=3>
+            {{orderItemsDetails.orderedQuantity}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Total Price:            
+          </td>
+          <td colspan=3> 
+            {{orderItemsDetails.subTotal}}
+          </td>
+        </tr>
+        <tr>          
+          <td colspan=4><button class="button" (click)=cancelOrder(orderItemsDetails)>Cancel Order</button></td>          
+        </tr>
+    </table>
+  </body>
+</html>

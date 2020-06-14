@@ -1,0 +1,40 @@
+.header
+{
+	background-color:#37475a;	
+    height:100px;
+    width:100%;
+    color:white;
+    text-align:center;
+    
+}
+.navigation-link-list
+{
+    border:1px solid black;
+    border-radius: 10px;
+    width:200px;
+    height:200px;
+    text-align:center;
+    
+}
+.navigation-list
+{
+    margin-top: 100px;
+}
+
+.navigationLinks
+{
+  float: right;
+}
+
+.mainLink
+{
+    
+    color:white;  
+      
+    padding: 15px;
+   
+}
+.mainLink:hover
+{
+    color:#d7ec73;
+}

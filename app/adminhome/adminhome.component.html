@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Admin home page</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title"  >Vyntra Mart</h1>
+      <div class="navigationLinks">
+                        
+        <ul class="nav "> 
+          <li class="nav-item">
+            <a class="mainLink"  routerLink="/adminprofile">{{parsedjsonUser.firstName}}</a>                                                  
+          </li>              
+            <li class="nav-item">
+                  <a class="mainLink" routerLink="/adminlogin" (click)="logout()">logout</a>                         
+            </li>
+       </ul>                        
+   </div>
+    </header>
+    <div class="container navigation-list">
+      <div class="row">
+        <a class="col-md-3 navigation-link" routerLink="/usermanagment">
+          <div class="navigation-link-list">
+            <p>User Management</p><hr>
+            <p>View users and Delete users</p>
+          </div>
+        </a>
+        <a class="col-md-3 navigation-link" routerLink="/productmanagement">
+          <div class="navigation-link-list">
+            <p>Product Management</p><hr>
+            <p>Add products,View products,update products and delete products</p>
+          </div>
+        </a>
+        <a class="col-md-3 navigation-link" routerLink="/ordersmanagement">
+          <div class="navigation-link-list">
+            <p>Orders Management</p><hr>
+            <p>View orders and update the order delivery status</p>
+          </div>
+        </a>
+        <a class="col-md-3 navigation-link" routerLink="/categorymanagement">
+          <div class="navigation-link-list">
+            <p>Category Management</p><hr>
+            <p>Add category,View category, Update category and Delete Category</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

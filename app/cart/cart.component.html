@@ -1,0 +1,65 @@
+<p>
+ 
+
+<html>
+  <body>
+    <div class="container-fluid header">
+      <h1 class="title"  >Vyntra Mart</h1>
+
+           <div class="navigationLinks">
+               
+               <ul class="nav ">  
+                    <li class="nav-item">
+                         <a class="mainLink" routerLink="/home">Home</a>                                                  
+                    </li>                           
+                    <li class="nav-item">
+                         <a class="mainLink" routerLink="/profilepage"y>{{parsedjsonUser.firstName}}</a>                                                  
+                    </li>
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/deliverylocation">Delivery Location</a>                                                  
+                    </li>
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/orders">Order Details</a>                                                  
+                    </li> 
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/cart">Cart</a>                                                  
+                    </li> 
+                   <li class="nav-item">
+                         <a class="mainLink" routerLink="['']" (click)="logout()">logout</a>                         
+                   </li>
+              </ul>           
+                           
+           </div>
+
+    </div>
+    <table id="cartProd">
+      <tr *ngFor="let p of prod">
+        <td>
+           <div class="col-md-4">                   
+    
+          <img class="custom-image-style" img src="{{p.image}}" height="100px" width="100px" style="margin-left: 60px;margin-top: 10px">
+        </div>
+      </td>
+    
+     <td>
+      <div class="row">
+         <div>
+             <p style="margin-left: 70px"><strong>{{p.pname}}:&nbsp;${{p.price}}</strong></p>                               
+         </div>                           
+     </div>
+    </td>               
+
+
+<td>
+     <button class="btn btn-success" (click)="redirectToPayment(p)">Buy Now</button>
+     &nbsp;&nbsp;&nbsp;<button class="btn btn-success" (click)="removeFromCart(p.pid)">Remove</button>
+</td>
+</tr>
+<tr>
+    <td><strong>Total Amount</strong></td>
+    <td><strong>${{shoppingcartObj.cartTotal}}</strong></td>
+</tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>Payment Page</title>
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid header">
+        <h1 class="title"  >Vyntra Mart</h1>
+
+             <div class="navigationLinks">
+                 
+               <ul class="nav ">  
+                    <li class="nav-item">
+                         <a class="mainLink" routerLink="/home">Home</a>                                                  
+                    </li>                           
+                    <li class="nav-item">
+                         <a class="mainLink" routerLink="/profilepage">{{parsedjsonUser.firstName}}</a>                                                  
+                    </li>
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/deliverylocation">Delivery Location</a>                                                  
+                    </li>
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/orders">Order Details</a>                                                  
+                    </li> 
+                    <li class="nav-item">
+                         <a class="mainLink"  routerLink="/cart">Cart</a>                                                  
+                    </li> 
+                   <li class="nav-item">
+                         <a class="mainLink" routerLink="['']" (click)="logout()">logout</a>                         
+                   </li>
+              </ul>         
+                             
+             </div>
+   </div>
+    </header>
+    <div class="container text-center order-status">{{orderStatusMessage}}</div>
+    <div class="container text-center products-order" *ngIf="product">
+    
+         <table>
+              <div class="card">
+              <tr>
+                   <td >Product Name:</td>
+                   <td>
+                        {{product.pname}}
+                   </td>
+              </tr>
+              <tr>
+                   
+                   <td>Quanity:</td>
+                   <td>
+                        <input type="number" name="quantity" id="quantity" [(ngModel)]="quantity" (change)="calculateTotal()">
+                   </td>
+               
+              </tr>
+              <tr>
+                   <td>
+                        Product Price:
+                   </td>
+
+                   <td>
+                        Rs.{{product.price}}
+                   </td>
+              </tr>
+              <tr>
+                   <td>
+                        Offer:
+                   </td>
+                   <td>
+                       {{product.offer}}
+                   </td>
+              </tr>
+              <tr>
+                   <td>
+                        Total:
+                   </td>
+                   <td>
+                        {{totalAmount}}
+                   </td>
+              </tr>
+              </div>
+              <div class="pament-select" *ngFor="let payment of paymentType">
+              <tr>
+                    
+                   <td>
+                        Payment Mode:
+                   </td>
+                   
+                    <td>                        
+                         <input type="radio" name="paymentTypeId" value="{{payment.paymentTypeId}}" [(ngModel)]="selectedPaymentType.paymentTypeId" #paymentTypeId="ngModel" (click)="showCardDetails(payment.paymentTypeName)">{{payment.paymentTypeName}}
+                    </td>
+                    
+              </tr>
+               </div>
+              <div class="Bank-card-details" *ngIf="isShown">
+               <tr>
+                    <td>Card Number</td>
+                    <td><input type="text" placeholder="enter card number"></td>
+               </tr>
+               <tr>
+                    <td>Expiration Date</td>
+                    <td>
+                         month:<br><input type="text"><br>
+                         year:<br><input type="text">
+                    </td>                    
+               </tr>
+               <tr>
+                    <td>cvv:</td>
+                    <td>
+                         <input type="text">
+                    </td>
+               </tr>
+              </div>
+              
+              <tr>
+                   <td>
+                        <button class="button" (click)="placeOrder(product)" type="button">Checkout</button>
+                        
+                   </td>
+              </tr>
+
+         </table>
+    </div>
+  </body>
+</html>
